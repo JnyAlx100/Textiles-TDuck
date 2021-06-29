@@ -1,4 +1,4 @@
-package clases;
+package modelo;
 
 import java.awt.HeadlessException;
 import java.sql.Connection;
@@ -49,7 +49,7 @@ public class ProductoSQL{
         }
     }
 
-     public ArrayList<InformacionProducto> verDatosProductosInventario(){
+    public ArrayList<InformacionProducto> verDatosProductosInventario() {
         ArrayList<InformacionProducto> datosObtenidos = new ArrayList<InformacionProducto>();
         try {
             Connection con = null;
@@ -58,8 +58,8 @@ public class ProductoSQL{
             String sql = "SELECT idGenerado, nombre, descripcion, existencias, precioVenta FROM producto";
             Statement st = (Statement) con.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
-                InformacionProducto productoInformacion = new InformacionProducto(rs.getString("idGenerado"), rs.getString("nombre"), 
+            while (rs.next()) {
+                InformacionProducto productoInformacion = new InformacionProducto(rs.getString("idGenerado"), rs.getString("nombre"),
                         rs.getString("descripcion"), rs.getString("existencias"), rs.getString("precioVenta"));
                 datosObtenidos.add(productoInformacion);
             }

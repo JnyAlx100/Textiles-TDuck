@@ -1,9 +1,9 @@
-package forms;
+package vista;
 
-import clases.InformacionInsumo;
-import clases.InformacionProducto;
-import clases.InsumoSQL;
-import clases.ProductoSQL;
+import modelo.InformacionInsumo;
+import modelo.InformacionProducto;
+import modelo.InsumoSQL;
+import modelo.ProductoSQL;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JTable;

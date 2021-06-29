@@ -1,7 +1,7 @@
-package forms;
+package vista;
 
-import clases.InsumoSQL;
-import clases.ProductoSQL;
+import modelo.InsumoSQL;
+import modelo.ProductoSQL;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.sql.SQLException;
@@ -490,7 +490,7 @@ public class AgregarProductoInsumoNuevo extends javax.swing.JFrame {
 
     private void btt_inicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_inicio1ActionPerformed
         vaciarFields();
-        MenuInventario ventana = new MenuInventario();
+        menuPrincipal ventana = new menuPrincipal();
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btt_inicio1ActionPerformed
