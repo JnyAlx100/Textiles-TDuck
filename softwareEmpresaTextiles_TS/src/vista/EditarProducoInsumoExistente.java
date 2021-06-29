@@ -6,7 +6,6 @@ import clases.InformacionInsumo;
 import clases.InsumoSQL;
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -17,8 +16,8 @@ import javax.swing.table.TableRowSorter;
  * @author jossu
  */
 public class EditarProducoInsumoExistente extends javax.swing.JFrame {
-    private ProductoSQL productoFuncionSQL = new ProductoSQL();
-    private InsumoSQL insumoFuncionSQL = new InsumoSQL();
+    private final ProductoSQL productoFuncionSQL = new ProductoSQL();
+    private final InsumoSQL insumoFuncionSQL = new InsumoSQL();
     private DefaultTableModel dm;
     private int identificadorTabla = 0;
     
