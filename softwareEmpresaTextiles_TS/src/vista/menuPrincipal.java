@@ -1,4 +1,4 @@
-package forms;
+package vista;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
