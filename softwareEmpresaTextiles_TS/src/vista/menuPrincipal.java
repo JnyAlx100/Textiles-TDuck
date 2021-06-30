@@ -222,8 +222,8 @@ public class menuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btt_inventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_inventarioActionPerformed
-//        inventarioMenu ventana = new inventarioMenu();
-//        ventana.setVisible(true);
+        MenuInventario ventana = new MenuInventario();
+        ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btt_inventarioActionPerformed
 
