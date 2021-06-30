@@ -6,8 +6,11 @@
 package modelo;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,13 +18,14 @@ import javax.swing.JOptionPane;
  * @author Douglas
  */
 public class ClienteSQL {
-    public void new_user(String nit, String nombre, String direccion, String correo, int telefono)throws SQLException {
+
+    public void new_user(String nit, String nombre, String direccion, String correo, int telefono) throws SQLException {
         try {
             ConexionDB sql = ConexionDB.InstanciaSingleton();
             Connection con = sql.conectarMySQL();
             String query
                     = " INSERT INTO cliente (nit, nombre, direccion, correo, telefono) VALUES"
-                    +"("+ "'" + nit + "'" + "," + "'" + nombre + "'" + "," + "'" + direccion + "'"+ "," + "'" + correo + "'" + "," + telefono +")"+";";
+                    + "(" + "'" + nit + "'" + "," + "'" + nombre + "'" + "," + "'" + direccion + "'" + "," + "'" + correo + "'" + "," + telefono + ")" + ";";
             System.out.println("query: " + query);
             Statement stm = con.createStatement();
             int rs = stm.executeUpdate(query);
@@ -36,4 +40,5 @@ public class ClienteSQL {
             System.out.println(ex);
         }
     }
+
 }
