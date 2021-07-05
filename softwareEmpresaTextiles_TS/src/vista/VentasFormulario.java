@@ -6,6 +6,14 @@
 package vista;
 
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.*;
 
 /**
  *
@@ -13,11 +21,17 @@ import java.awt.Color;
  */
 public class VentasFormulario extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Moduloventas
-     */
+    ControladorVentas cv;
+    DefaultTableModel jTableModel;
+    
     public VentasFormulario() {
         initComponents();
+        cv = new ControladorVentas(0, 0, 1);
+        jTableModel = (DefaultTableModel) jTable4.getModel();
+        limpiar();
+        this.setLocationRelativeTo(null);
+//        new VentaSQL().insertarVenta(new Venta(1, 1, java.sql.Date.valueOf(LocalDate.now()), 0, 0, 0, 1));
+        
     }
 
     /**
@@ -35,35 +49,29 @@ public class VentasFormulario extends javax.swing.JFrame {
         btt_inicio = new javax.swing.JButton();
         btt_inicio1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        textCliente = new javax.swing.JTextField();
+        jTextFieldCliente = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        textProducto = new javax.swing.JTextField();
+        jTextFieldProducto = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        textCantidad = new javax.swing.JTextField();
+        jTextFieldCantidad = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         btt_inicio2 = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JSeparator();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jSeparator6 = new javax.swing.JSeparator();
-        jSeparator7 = new javax.swing.JSeparator();
-        jSeparator8 = new javax.swing.JSeparator();
-        textCantidad2 = new javax.swing.JTextField();
-        textID2 = new javax.swing.JTextField();
-        textFecha = new javax.swing.JTextField();
+        jLabelIdVenta = new javax.swing.JLabel();
+        jLabelFecha = new javax.swing.JLabel();
+        jLabelTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
         jTable4.setAutoCreateRowSorter(true);
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"12", "geo", "cliente", "1", "120", "125"},
+                {"12", "geo", "cliente", "1", "125", null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -71,7 +79,7 @@ public class VentasFormulario extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "ID Producto", "Nombre", "Descripcion ", "Existencias", "Precio Compra", "Precio Venta"
+                "ID Producto", "Nombre", "Descripcion ", "Cantidad", "Precio Venta", "SubTotal"
             }
         ));
         jTable4.setGridColor(new java.awt.Color(255, 255, 255));
@@ -79,11 +87,19 @@ public class VentasFormulario extends javax.swing.JFrame {
         jTable4.setRowHeight(25);
         jTable4.setSelectionBackground(new java.awt.Color(60, 187, 9));
         jScrollPane1.setViewportView(jTable4);
+        if (jTable4.getColumnModel().getColumnCount() > 0) {
+            jTable4.getColumnModel().getColumn(0).setHeaderValue("ID Producto");
+            jTable4.getColumnModel().getColumn(1).setHeaderValue("Nombre");
+            jTable4.getColumnModel().getColumn(2).setHeaderValue("Descripcion ");
+            jTable4.getColumnModel().getColumn(3).setHeaderValue("Cantidad");
+            jTable4.getColumnModel().getColumn(4).setHeaderValue("Precio Venta");
+            jTable4.getColumnModel().getColumn(5).setHeaderValue("SubTotal");
+        }
 
         btt_inicio.setBackground(new java.awt.Color(41, 168, 73));
         btt_inicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btt_inicio.setForeground(new java.awt.Color(255, 255, 255));
-        btt_inicio.setText("Agregar");
+        btt_inicio.setText("Agregar a la canasta");
         btt_inicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btt_inicioActionPerformed(evt);
@@ -103,20 +119,18 @@ public class VentasFormulario extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Cliente");
+        jLabel6.setText("ID Cliente");
 
-        textCliente.setBackground(new java.awt.Color(255, 255, 255));
-        textCliente.setForeground(new java.awt.Color(204, 204, 204));
-        textCliente.setText("Ingrese el nombre del cliente");
-        textCliente.setBorder(null);
-        textCliente.addFocusListener(new java.awt.event.FocusAdapter() {
+        jTextFieldCliente.setForeground(new java.awt.Color(204, 204, 204));
+        jTextFieldCliente.setBorder(null);
+        jTextFieldCliente.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                textClienteFocusGained(evt);
+                jTextFieldClienteFocusGained(evt);
             }
         });
-        textCliente.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textClienteActionPerformed(evt);
+                jTextFieldClienteActionPerformed(evt);
             }
         });
 
@@ -128,20 +142,18 @@ public class VentasFormulario extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Producto");
+        jLabel8.setText("ID Producto");
 
-        textProducto.setBackground(new java.awt.Color(255, 255, 255));
-        textProducto.setForeground(new java.awt.Color(204, 204, 204));
-        textProducto.setText("Ingrese el nombre del producto");
-        textProducto.setBorder(null);
-        textProducto.addFocusListener(new java.awt.event.FocusAdapter() {
+        jTextFieldProducto.setForeground(new java.awt.Color(204, 204, 204));
+        jTextFieldProducto.setBorder(null);
+        jTextFieldProducto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                textProductoFocusGained(evt);
+                jTextFieldProductoFocusGained(evt);
             }
         });
-        textProducto.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textProductoActionPerformed(evt);
+                jTextFieldProductoActionPerformed(evt);
             }
         });
 
@@ -150,18 +162,16 @@ public class VentasFormulario extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Cantidad");
 
-        textCantidad.setBackground(new java.awt.Color(255, 255, 255));
-        textCantidad.setForeground(new java.awt.Color(204, 204, 204));
-        textCantidad.setText("Ingrese la cantidad del producto");
-        textCantidad.setBorder(null);
-        textCantidad.addFocusListener(new java.awt.event.FocusAdapter() {
+        jTextFieldCantidad.setForeground(new java.awt.Color(204, 204, 204));
+        jTextFieldCantidad.setBorder(null);
+        jTextFieldCantidad.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                textCantidadFocusGained(evt);
+                jTextFieldCantidadFocusGained(evt);
             }
         });
-        textCantidad.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textCantidadActionPerformed(evt);
+                jTextFieldCantidadActionPerformed(evt);
             }
         });
 
@@ -183,68 +193,17 @@ public class VentasFormulario extends javax.swing.JFrame {
 
         jSeparator5.setForeground(new java.awt.Color(41, 168, 73));
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("ID:");
+        jLabelIdVenta.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jLabelIdVenta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelIdVenta.setText("ID:");
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Fecha:");
+        jLabelFecha.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jLabelFecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelFecha.setText("Fecha:");
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("Total:");
-
-        jSeparator6.setForeground(new java.awt.Color(41, 168, 73));
-
-        jSeparator7.setForeground(new java.awt.Color(41, 168, 73));
-
-        jSeparator8.setForeground(new java.awt.Color(41, 168, 73));
-
-        textCantidad2.setBackground(new java.awt.Color(255, 255, 255));
-        textCantidad2.setForeground(new java.awt.Color(204, 204, 204));
-        textCantidad2.setBorder(null);
-        textCantidad2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textCantidad2FocusGained(evt);
-            }
-        });
-        textCantidad2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textCantidad2ActionPerformed(evt);
-            }
-        });
-
-        textID2.setBackground(new java.awt.Color(255, 255, 255));
-        textID2.setForeground(new java.awt.Color(204, 204, 204));
-        textID2.setBorder(null);
-        textID2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textID2FocusGained(evt);
-            }
-        });
-        textID2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textID2ActionPerformed(evt);
-            }
-        });
-
-        textFecha.setBackground(new java.awt.Color(255, 255, 255));
-        textFecha.setForeground(new java.awt.Color(204, 204, 204));
-        textFecha.setBorder(null);
-        textFecha.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                textFechaFocusGained(evt);
-            }
-        });
-        textFecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFechaActionPerformed(evt);
-            }
-        });
+        jLabelTotal.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jLabelTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTotal.setText("Total:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -267,48 +226,36 @@ public class VentasFormulario extends javax.swing.JFrame {
                                         .addGap(289, 289, 289))
                                     .addComponent(btt_inicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
+                                .addGap(53, 53, 53)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel10)
-                                    .addComponent(jLabel8)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(17, 17, 17)
+                                    .addComponent(jLabel8))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(94, 94, 94)
+                            .addComponent(jTextFieldProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(59, 59, 59)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btt_inicio2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(149, 149, 149))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(148, 148, 148)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textID2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel13)
-                .addGap(11, 11, 11)
-                .addComponent(textFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textCantidad2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelIdVenta)
+                .addGap(208, 208, 208)
+                .addComponent(jLabelFecha)
+                .addGap(215, 215, 215)
+                .addComponent(jLabelTotal)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -323,41 +270,34 @@ public class VentasFormulario extends javax.swing.JFrame {
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(textCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextFieldCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
                         .addGap(9, 9, 9)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(9, 9, 9)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(textProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(textCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(104, 104, 104)
+                        .addGap(115, 115, 115)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14)
-                            .addComponent(textCantidad2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textID2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabelIdVenta)
+                            .addComponent(jLabelFecha)
+                            .addComponent(jLabelTotal)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btt_inicio2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btt_inicio2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -365,84 +305,87 @@ public class VentasFormulario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1197, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCantidadActionPerformed
+    private void jTextFieldCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCantidadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textCantidadActionPerformed
+    }//GEN-LAST:event_jTextFieldCantidadActionPerformed
 
-    private void textCantidadFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textCantidadFocusGained
+    private void jTextFieldCantidadFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCantidadFocusGained
         // TODO add your handling code here:
-        textCantidad.setText("");
-        textCantidad.setForeground(Color.BLACK);
-    }//GEN-LAST:event_textCantidadFocusGained
+        jTextFieldCantidad.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jTextFieldCantidadFocusGained
 
-    private void textProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textProductoActionPerformed
+    private void jTextFieldProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textProductoActionPerformed
+    }//GEN-LAST:event_jTextFieldProductoActionPerformed
 
-    private void textProductoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textProductoFocusGained
+    private void jTextFieldProductoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldProductoFocusGained
         // TODO add your handling code here:
-        textProducto.setText("");
-        textProducto.setForeground(Color.BLACK);
-    }//GEN-LAST:event_textProductoFocusGained
+        jTextFieldProducto.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jTextFieldProductoFocusGained
 
-    private void textClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textClienteActionPerformed
+    private void jTextFieldClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textClienteActionPerformed
+    }//GEN-LAST:event_jTextFieldClienteActionPerformed
 
-    private void textClienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textClienteFocusGained
+    private void jTextFieldClienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldClienteFocusGained
         // TODO add your handling code here:
-        textCliente.setText("");
-        textCliente.setForeground(Color.BLACK);
-    }//GEN-LAST:event_textClienteFocusGained
+        jTextFieldCliente.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jTextFieldClienteFocusGained
 
     private void btt_inicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_inicio1ActionPerformed
         // TODO add your handling code here:
+        ClienteFormulario cf = new ClienteFormulario();
+        cf.setVisible(true);
     }//GEN-LAST:event_btt_inicio1ActionPerformed
 
     private void btt_inicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_inicioActionPerformed
-
+        //se verifica que haya texto en los jTextField
+        if (jTextFieldCantidad.getText().isEmpty() || jTextFieldProducto.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe llenar los campos de 'Producto' y 'Cantidad'", "Error", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        cv.agregarEnCanasta(Integer.parseInt(jTextFieldProducto.getText()), Integer.parseInt(jTextFieldCantidad.getText()));
+        limpiar();
+        
     }//GEN-LAST:event_btt_inicioActionPerformed
 
     private void btt_inicio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_inicio2ActionPerformed
-        // TODO add your handling code here:
+        //se verifica que se haya ingresado un cliente
+        if (jTextFieldCliente.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un cliente", "Error", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        //se verifica que el cliente exista
+        if (ClienteSQL.getCliente(Integer.parseInt(jTextFieldCliente.getText())) == null) {
+            JOptionPane.showMessageDialog(this, "Este id de cliente no existe!", "Error", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        cv.realizarVenta(Integer.parseInt(jTextFieldCliente.getText()));
+        limpiar();
     }//GEN-LAST:event_btt_inicio2ActionPerformed
-
-    private void textCantidad2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textCantidad2FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textCantidad2FocusGained
-
-    private void textCantidad2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCantidad2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textCantidad2ActionPerformed
-
-    private void textID2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textID2FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textID2FocusGained
-
-    private void textID2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textID2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textID2ActionPerformed
-
-    private void textFechaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFechaFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFechaFocusGained
-
-    private void textFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFechaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFechaActionPerformed
-
+    
+    public void limpiar() {
+        jTextFieldCantidad.setText("");
+        jTextFieldProducto.setText("");
+        jLabelFecha.setText("Fecha: " + cv.getVenta().getFecha().toString());
+        jLabelIdVenta.setText("No." + String.valueOf(cv.getVenta().getIdVenta()));
+        jLabelTotal.setText("Total: Q" + String.valueOf(cv.getVenta().getTotal()));
+        jTableModel = cv.getTableModel(jTableModel);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -486,27 +429,21 @@ public class VentasFormulario extends javax.swing.JFrame {
     private javax.swing.JButton btt_inicio1;
     private javax.swing.JButton btt_inicio2;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelFecha;
+    private javax.swing.JLabel jLabelIdVenta;
+    private javax.swing.JLabel jLabelTotal;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTable jTable4;
-    private javax.swing.JTextField textCantidad;
-    private javax.swing.JTextField textCantidad2;
-    private javax.swing.JTextField textCliente;
-    private javax.swing.JTextField textFecha;
-    private javax.swing.JTextField textID2;
-    private javax.swing.JTextField textProducto;
+    private javax.swing.JTextField jTextFieldCantidad;
+    private javax.swing.JTextField jTextFieldCliente;
+    private javax.swing.JTextField jTextFieldProducto;
     // End of variables declaration//GEN-END:variables
 }

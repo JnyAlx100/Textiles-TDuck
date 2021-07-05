@@ -10,11 +10,13 @@ package modelo;
  * @author Serratia Marcesens
  */
 public class DetalleVenta {
+    private int idDetalleVenta;
     private int ventaIdVenta;
     private int productoidProducto;
     private int cantidad;
 
-    public DetalleVenta(int ventaIdVenta, int productoidProducto, int cantidad) {
+    public DetalleVenta(int idDetalleVenta, int ventaIdVenta, int productoidProducto, int cantidad) {
+        this.idDetalleVenta = idDetalleVenta;
         this.ventaIdVenta = ventaIdVenta;
         this.productoidProducto = productoidProducto;
         this.cantidad = cantidad;
@@ -42,6 +44,14 @@ public class DetalleVenta {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public int getIdDetalleVenta() {
+        return idDetalleVenta;
+    }
+
+    public void setIdDetalleVenta(int idDetalleVenta) {
+        this.idDetalleVenta = idDetalleVenta;
     }
     
 }

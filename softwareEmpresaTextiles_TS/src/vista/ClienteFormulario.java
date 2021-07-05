@@ -25,6 +25,7 @@ public class ClienteFormulario extends javax.swing.JFrame {
      */
     public ClienteFormulario() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

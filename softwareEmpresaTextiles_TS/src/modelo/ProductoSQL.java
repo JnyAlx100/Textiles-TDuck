@@ -45,16 +45,17 @@ public class ProductoSQL {
         return productos;
     }
 
-    public int actualizarExistencias(Producto p) {
+    public static void actualizarExistencias(int idProducto, int existencias) {
         int n = 0;
         try {
             ConexionDB con1 = ConexionDB.InstanciaSingleton();
             Connection con = con1.conectarMySQL();
-            con.setAutoCommit(false);
             Statement st = con.createStatement();
-            String sql = "UPDATE producto SET existencias=?, where idProducto=" + p.getIdProducto();
+            System.out.println("antes habian " + getProducto(idProducto).getExistencias() + " existencias y ahora habran "
+            + existencias);
+            String sql = "UPDATE producto SET existencias=? where idProducto=" + idProducto;
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, p.getExistencias());
+            pst.setInt(1, existencias);
             n = pst.executeUpdate();
             if (n > 0) {
                 System.out.println("EXISTENCIAS ACTUALIZADAS CORRECTAMENTE");
@@ -62,17 +63,29 @@ public class ProductoSQL {
         } catch (SQLException | HeadlessException e) {
             System.out.println("LOS DATOS DE AGREGAR EXISTENCIAS NO HAN SIDO GUARDADOS CORRECTAMENTE");
         }
-        return n;
     }
     
-    public Producto getProducto(int id) {
-        ArrayList<Producto> inventario = getProductos();
-        for(Producto producto: inventario) {
-            if (id == producto.getIdProducto()) {
-                return producto;
+    public static Producto getProducto(int id) {
+        Producto p = null;
+        try {
+            ConexionDB con1 = ConexionDB.InstanciaSingleton();
+            Connection cn = con1.conectarMySQL();
+            String sql = "SELECT * FROM producto WHERE idProducto = " + id;
+            Statement st = (Statement) cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                p = new Producto();
+                p.setIdProducto(id);
+                p.setIdGenerado(rs.getString("idGenerado"));
+                p.setNombre(rs.getString("nombre"));
+                p.setDescripcion(rs.getString("descripcion"));
+                p.setExistencias(Integer.parseInt(rs.getString("existencias")));
+                p.setPrecioVenta(Float.parseFloat(rs.getString("precioVenta")));
             }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR AL OBTENER PRODUCTO", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        return null;
+        return p;
     }
     
     public boolean nuevo_producto(String idGenerado, String nombre, String descripcion, int existencias, float precioVenta) throws SQLException {

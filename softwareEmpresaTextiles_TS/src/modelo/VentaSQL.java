@@ -22,55 +22,42 @@ import javax.swing.JOptionPane;
  * @author Serratia Marcesens
  */
 public class VentaSQL {
-    public int insertarVenta(Venta venta) {
-        int n = 0;
+    public static void insertarVenta(Venta venta) {
         try {
-            ConexionDB con1 = ConexionDB.InstanciaSingleton();
-            Connection con = con1.conectarMySQL();
-            con.setAutoCommit(false);
-            Statement st = con.createStatement();
-            String sql = "insert into venta (Cliente_idCliente,fecha,totalSinIVA,total,descuento,UsuarioSistema_idUsuarioSistema) values (?,?,?,?,?,?)";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, venta.getClienteIdCliente());
-            pst.setDate(2, Date.valueOf(LocalDate.now()));
-            pst.setFloat(3, venta.getTotalSinIva());
-            pst.setFloat(4, venta.getTotal());
-            pst.setFloat(5, venta.getDescuento());
-            pst.setInt(6, venta.getUsuarioSistema());
-            n = pst.executeUpdate();
-            if (n > 0) {
-                System.out.println("DATOS GUARDADOS CORRECTAMENTE");
+            ConexionDB sql = ConexionDB.InstanciaSingleton();
+            Connection con = sql.conectarMySQL();
+            String query
+                    = " INSERT INTO venta (Cliente_idCliente, fecha, totalSinIVA, total, UsuarioSistema_idUsuarioSistema) VALUES"
+                    + "(" + "'" + venta.getClienteIdCliente() + "'" + "," + "'" + venta.getFecha() + "'" + "," + "'" 
+                    + venta.getTotalSinIva() + "'" + "," + "'" + venta.getTotal() + "'" + "," + venta.getUsuarioSistema() + ")" + ";";
+            System.out.println("query: " + query);
+            Statement stm = con.createStatement();
+            int rs = stm.executeUpdate(query);
+            if (rs == 1) {
+                //Mensaje de que se llenó correctamente y resetear valores
+                JOptionPane.showMessageDialog(null, "Venta ingresada con éxito", "Correcto",
+                        JOptionPane.INFORMATION_MESSAGE);
             }
-        } catch (SQLException | HeadlessException e) {
-            System.out.println("LOS DATOS DE INSERTAR COMPRA NO HAN SIDO GUARDADOS CORRECTAMENTE");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al crear venta, verificar datos", "Error",
+                    JOptionPane.WARNING_MESSAGE);
+            System.out.println(ex);
         }
-        return n;
     }
     
-    public static int getIdVenta() {
-        ArrayList<Venta> venta = new ArrayList<>();
+    public static int getIdNuevaVenta() {
         int id = 1;
         try {
             ConexionDB con1 = ConexionDB.InstanciaSingleton();
             Connection cn = con1.conectarMySQL();
-            String sql = "select * from venta";
+            String sql = "SELECT * FROM venta ORDER BY idVenta DESC LIMIT 1";
             Statement st = (Statement) cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                int idVenta = Integer.parseInt(rs.getString("idVenta"));
-                int clienteIdCliente = Integer.parseInt(rs.getString("Cliente_idCliente"));
-                Date fecha = Date.valueOf(rs.getString("fecha"));
-                float totalSinIva = Float.parseFloat(rs.getString("monto_total"));
-                float total = Float.parseFloat(rs.getString("total"));
-                float descuento = Float.parseFloat(rs.getString("descuento"));
-                int usuarioSistema = Integer.parseInt(rs.getString("UsuarioSistema_idUsuarioSistema"));
-                venta.add(new Venta(idVenta, clienteIdCliente, fecha, totalSinIva, total, descuento, usuarioSistema));
+                id = Integer.parseInt(rs.getString("idVenta")) + 1;
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "NO SE PUEDEN VISUALIZAR LOS DATOS DE LA TABLA", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        if (!venta.isEmpty()) {
-            id = venta.get(venta.size() - 1).getIdVenta() + 1;
+            JOptionPane.showMessageDialog(null, "ERROR AL OBTENER EL ID DE NUEVA VENTA", "Error", JOptionPane.ERROR_MESSAGE);
         }
         return id;
     }

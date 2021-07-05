@@ -26,6 +26,9 @@ public class Producto {
         this.precioVenta = precioVenta;
     }
 
+    public Producto() {
+    }
+
     public int getIdProducto() {
         return idProducto;
     }

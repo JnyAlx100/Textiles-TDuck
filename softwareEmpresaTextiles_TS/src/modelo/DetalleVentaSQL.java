@@ -18,25 +18,24 @@ import javax.swing.JOptionPane;
  */
 public class DetalleVentaSQL {
 
-    public int insertarDetalleVenta(DetalleVenta dv) {
+    public static void insertarDetalleVenta(DetalleVenta dv) {
         int n = 0;
         try {
             ConexionDB con1 = ConexionDB.InstanciaSingleton();
             Connection con = con1.conectarMySQL();
-            con.setAutoCommit(false);
-            Statement st = con.createStatement();
-            String sql = "insert into detalleventa (Venta_idVenta,Producto_idProducto,cantidad) values (?,?,?)";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, dv.getVentaIdVenta());
-            pst.setInt(2, dv.getProductoidProducto());
-            pst.setInt(3, dv.getCantidad());
-            n = pst.executeUpdate();
+            System.out.println("ventaidventa: " + dv.getVentaIdVenta() + ", prductoid: " + dv.getProductoidProducto()
+            + ", cantidad: " + dv.getCantidad());
+            String query
+                    = " INSERT INTO detalleventa (Venta_idVenta, Producto_idProducto, cantidad) VALUES"
+                    + "(" + "'" + dv.getVentaIdVenta() + "'" + "," + "'" + dv.getProductoidProducto() + "'" + "," + "'" + dv.getCantidad() + "'" + ")" + ";";
+            System.out.println("query: " + query);
+            Statement stm = con.createStatement();
+            int rs = stm.executeUpdate(query);
             if (n > 0) {
-                System.out.println("DATOS GUARDADOS CORRECTAMENTE EN COMPRA_INVENTARIO");
+                System.out.println("DATOS GUARDADOS CORRECTAMENTE EN DETALLEVENTA");
             }
         } catch (SQLException | HeadlessException e) {
-            System.out.println("LOS DATOS DE COMPRA INVENTARIO NO HAN SIDO GUARDADOS CORRECTAMENTE");
+            System.out.println("LOS DATOS DE DETALLEVENTA NO HAN SIDO GUARDADOS CORRECTAMENTE");
         }
-        return n;
     }
 }

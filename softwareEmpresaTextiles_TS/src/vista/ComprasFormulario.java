@@ -71,7 +71,7 @@ public class ComprasFormulario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Semilight", 0, 48)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
@@ -145,7 +145,6 @@ public class ComprasFormulario extends javax.swing.JFrame {
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("Descripción");
 
-        textId.setBackground(new java.awt.Color(255, 255, 255));
         textId.setForeground(new java.awt.Color(204, 204, 204));
         textId.setText("Ingrese el id del producto");
         textId.setBorder(null);
@@ -160,7 +159,6 @@ public class ComprasFormulario extends javax.swing.JFrame {
             }
         });
 
-        textPrecio.setBackground(new java.awt.Color(255, 255, 255));
         textPrecio.setForeground(new java.awt.Color(204, 204, 204));
         textPrecio.setText("Ingrese el precio del producto");
         textPrecio.setBorder(null);
@@ -175,7 +173,6 @@ public class ComprasFormulario extends javax.swing.JFrame {
             }
         });
 
-        textDescripcion.setBackground(new java.awt.Color(255, 255, 255));
         textDescripcion.setForeground(new java.awt.Color(204, 204, 204));
         textDescripcion.setText("Ingrese descripcion del producto");
         textDescripcion.setBorder(null);
@@ -190,7 +187,6 @@ public class ComprasFormulario extends javax.swing.JFrame {
             }
         });
 
-        textCantidad.setBackground(new java.awt.Color(255, 255, 255));
         textCantidad.setForeground(new java.awt.Color(204, 204, 204));
         textCantidad.setText("Ingrese la cantidad a comprar");
         textCantidad.setBorder(null);
@@ -220,17 +216,14 @@ public class ComprasFormulario extends javax.swing.JFrame {
         jSeparator9.setForeground(new java.awt.Color(41, 168, 73));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("ID:");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Fecha:");
 
         jLabel14.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("Total:");
 
@@ -257,7 +250,6 @@ public class ComprasFormulario extends javax.swing.JFrame {
         jSeparator10.setForeground(new java.awt.Color(41, 168, 73));
 
         jLabel22.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(0, 0, 0));
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setText("Proveedor:");
 
@@ -281,7 +273,6 @@ public class ComprasFormulario extends javax.swing.JFrame {
             }
         });
 
-        textTotal.setBackground(new java.awt.Color(255, 255, 255));
         textTotal.setForeground(new java.awt.Color(204, 204, 204));
         textTotal.setBorder(null);
         textTotal.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -295,7 +286,6 @@ public class ComprasFormulario extends javax.swing.JFrame {
             }
         });
 
-        TextIdProveedor.setBackground(new java.awt.Color(255, 255, 255));
         TextIdProveedor.setForeground(new java.awt.Color(204, 204, 204));
         TextIdProveedor.setBorder(null);
         TextIdProveedor.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -309,7 +299,6 @@ public class ComprasFormulario extends javax.swing.JFrame {
             }
         });
 
-        textFecha.setBackground(new java.awt.Color(255, 255, 255));
         textFecha.setForeground(new java.awt.Color(204, 204, 204));
         textFecha.setBorder(null);
         textFecha.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -323,7 +312,6 @@ public class ComprasFormulario extends javax.swing.JFrame {
             }
         });
 
-        textProveedor.setBackground(new java.awt.Color(255, 255, 255));
         textProveedor.setForeground(new java.awt.Color(204, 204, 204));
         textProveedor.setBorder(null);
         textProveedor.addFocusListener(new java.awt.event.FocusAdapter() {

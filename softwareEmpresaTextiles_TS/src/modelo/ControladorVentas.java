@@ -15,9 +15,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -30,124 +32,98 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ControladorVentas {
 
-    public ArrayList<DetalleVenta> listaVentas;
-    public DateTimeFormatter dtf;
-    public LocalDateTime now;
-    public int total;
+    private DateTimeFormatter dtf;
+    private LocalDateTime now;
 
-    public ControladorVentas() {
-        dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        now = LocalDateTime.now();
-        total = 0;
-        listaVentas = new ArrayList<>();
+    private Venta venta;
+    private ArrayList<Producto> canasta;
+
+    public ControladorVentas(int idCliente, float total, int idUsuario) {
+        venta = new Venta(VentaSQL.getIdNuevaVenta(), idCliente, java.sql.Date.valueOf(LocalDate.now()), 0, 0, 0, idUsuario);
+        canasta = new ArrayList<>();
     }
 
-    public DefaultTableModel agregarProducto(int idPaciente, int idProducto, int cantidad, DefaultTableModel jTableModel) {
+    public void agregarEnCanasta(int idProducto, int cantidad) {
+        Producto p = ProductoSQL.getProducto(idProducto);
 
-        int cantidadPrevia = 0;
-        boolean yaEstaIngresado = false;
-        DetalleVenta aux = null;
+        //se verifica que el producto existe
+        if (p == null) {
+            JOptionPane.showMessageDialog(null, "Este producto no existe en el inventario!", "Error", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
 
-        for (DetalleVenta dv : listaVentas) {
-            if (dv.getProductoidProducto() == idProducto) {
-                cantidadPrevia = dv.getCantidad();
-                yaEstaIngresado = true;
-                aux = dv;
+        //se verifica que se disponga de las existencias necesarias
+        if (cantidad > p.getExistencias()) {
+            JOptionPane.showMessageDialog(null, "No se cuenta con la cantidad suficiente de producto!", "Error", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        venta.setTotal(venta.getTotal() + p.getPrecioVenta() * cantidad);
+        venta.setTotalSinIva(venta.getTotal() * 0.88f);
+
+        for (int x = 0; x < canasta.size(); x++) {
+            Producto elemento = canasta.get(x);
+            if (elemento.getIdProducto() == idProducto) {
+                //se verifica que se disponga de las existencias necesarias tomando en cuenta lo que ya se encontraba en el carrito
+                if (cantidad + elemento.getExistencias() > p.getExistencias()) {
+                    JOptionPane.showMessageDialog(null, "No se cuenta con la cantidad suficiente de producto!", "Error", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+                elemento.setExistencias(elemento.getExistencias() + cantidad);
+                return;
             }
         }
+        p.setExistencias(cantidad);
+        canasta.add(p);
+    }
 
-        Producto producto = new ProductoSQL().getProducto(idProducto);
-
-        if ((cantidad + cantidadPrevia) > producto.getExistencias()) {
-            JOptionPane.showMessageDialog(null, "No hay suficientes existencias para este producto!");
-            return null;
+    public void realizarVenta(int idCliente) {
+        //se verifica que hayan productos en la canasta
+        if (canasta.size() < 1) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar al menos un producto en el carrito!", "Error", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
 
-        if (yaEstaIngresado) {
-            aux.setCantidad(cantidad + cantidadPrevia);
-        } else {
-            aux = new DetalleVenta(VentaSQL.getIdVenta(), idProducto, cantidad + cantidadPrevia);
-            listaVentas.add(aux);
+        //se ingresa la fecha del momento
+        venta.setFecha(java.sql.Date.valueOf(LocalDate.now()));
+        //se ingresa el id del cliente
+        venta.setClienteIdCliente(idCliente);
+
+        //se inserta la venta
+        VentaSQL.insertarVenta(venta);
+
+        for (Producto p : canasta) {
+            //se insertan todos los elementos de la canasta a la tabla "detallecompra"
+            DetalleVentaSQL.insertarDetalleVenta(new DetalleVenta(0, venta.getIdVenta(), p.getIdProducto(), p.getExistencias()));
+
+            //se actualizan las existencias de los productos en la base de datos
+            int existencias = ProductoSQL.getProducto(p.getIdProducto()).getExistencias() - p.getExistencias();
+            ProductoSQL.actualizarExistencias(p.getIdProducto(), existencias);
         }
-        return actualizarTabla(jTableModel);
+        limpiar();
     }
 
-    public void reset() {
-        total = 0;
-        listaVentas = new ArrayList<>();
-    }
-
-    public String fecha() {
-        return dtf.format(now);
-    }
-
-    public DefaultTableModel actualizarTabla(DefaultTableModel jTableModel) {
+    public DefaultTableModel getTableModel(DefaultTableModel jTableModel) {
         jTableModel.setRowCount(0);
-        for (DetalleVenta vi : listaVentas) {
-            Producto producto = new ProductoSQL().getProducto(vi.getProductoidProducto());
-            jTableModel.addRow(new Object[]{producto.getIdProducto(), producto.getNombre(), producto.getDescripcion(), producto.getExistencias(), producto.getPrecioVenta()});
+        for (Producto p : canasta) {
+            jTableModel.addRow(new Object[]{p.getIdProducto(), p.getNombre(), p.getDescripcion(), p.getExistencias(), "Q" + p.getPrecioVenta()
+                    , "Q" + p.getPrecioVenta() * p.getExistencias()});
         }
         return jTableModel;
     }
 
-    public void realizarVenta(Venta venta) {
-        String accion = "Ventas";
-        String estado = "";
-        String trx_id = "";
-        int n1, n2, n3;
-        ConexionDB con1 = ConexionDB.InstanciaSingleton();
-        Connection con = con1.conectarMySQL();
-        n1 = actualizarInventario();
-        n2 = insertarVenta(venta);
-        n3 = insertarDetalleVenta();
-        int opc = JOptionPane.showConfirmDialog(null, "¿ESTA SEGURO QUE DESEA COMPLETAR LA TRANSACCIÓN?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (opc == JOptionPane.YES_OPTION) {
-            if (n1 > 0 && n2 > 0 && n3 > 0) {
-                try {
-                    con.commit();
-                    estado = "Comprometida";
-                    JOptionPane.showMessageDialog(null, "DATOS ACTUALIZADOS CORRECTAMENTE");
-                } catch (SQLException ex) {
-                }
-            } else {
-                try {
-                    con.rollback();
-                    estado = "Fallida";
-                } catch (SQLException ex) {
-                }
-            }
-        } else {
-            try {
-                con.rollback();
-                estado = "Anulada";
-            } catch (SQLException ex) {
-            }
-            JOptionPane.showMessageDialog(null, "SE HA CANCELADO LA TRANSACCIÓN");
-        }
+    public void limpiar() {
+        venta = new Venta(VentaSQL.getIdNuevaVenta(), venta.getClienteIdCliente(), java.sql.Date.valueOf(LocalDate.now()),
+                0, 0, 0, venta.getUsuarioSistema());
+        canasta = new ArrayList<>();
     }
 
-    public int insertarDetalleVenta() {
-        int n = 0;
-        for (DetalleVenta vi : listaVentas) {
-            n = new DetalleVentaSQL().insertarDetalleVenta(vi);
-        }
-        return n;
+    public Venta getVenta() {
+        return venta;
     }
 
-    public int insertarVenta(Venta venta) {
-        return new VentaSQL().insertarVenta(venta);
+    public ArrayList<Producto> getCanasta() {
+        return canasta;
     }
 
-    public int actualizarInventario() {
-        Producto producto;
-        int stockActual = 0;
-        int n = 0;
-        for (DetalleVenta vi : listaVentas) {
-            producto = new ProductoSQL().getProducto(vi.getProductoidProducto());
-            stockActual = producto.getExistencias() - vi.getCantidad();
-            producto.setExistencias(stockActual);
-            n = new ProductoSQL().actualizarExistencias(producto);
-        }
-        return n;
-    }
 }
