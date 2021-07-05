@@ -6,6 +6,7 @@
 package modelo;
 
 import com.mysql.jdbc.log.Log;
+import controlador.ConstructorFacturaDigital;
 import java.awt.HeadlessException;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -37,6 +38,7 @@ public class ControladorVentas {
 
     private Venta venta;
     private ArrayList<Producto> canasta;
+    private ConstructorFacturaDigital factura = new ConstructorFacturaDigital();
 
     public ControladorVentas(int idCliente, float total, int idUsuario) {
         venta = new Venta(VentaSQL.getIdNuevaVenta(), idCliente, java.sql.Date.valueOf(LocalDate.now()), 0, 0, 0, idUsuario);
@@ -100,6 +102,11 @@ public class ControladorVentas {
             int existencias = ProductoSQL.getProducto(p.getIdProducto()).getExistencias() - p.getExistencias();
             ProductoSQL.actualizarExistencias(p.getIdProducto(), existencias);
         }
+        
+        factura.agregarProductos(canasta);
+        factura.setVenta(venta);
+        factura.generarFactura();
+        
         limpiar();
     }
 

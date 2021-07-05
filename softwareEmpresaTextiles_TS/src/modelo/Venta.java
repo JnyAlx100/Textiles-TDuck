@@ -29,6 +29,16 @@ public class Venta {
         this.descuento = descuento;
         this.usuarioSistema = usuarioSistema;
     }
+    
+    public Venta(int idVenta, float totalSinIva, float total){
+        this.idVenta = idVenta;
+        this.totalSinIva = totalSinIva;
+        this.total = total;
+    }
+    
+    public Venta(){
+        
+    }
 
     public int getIdVenta() {
         return idVenta;
