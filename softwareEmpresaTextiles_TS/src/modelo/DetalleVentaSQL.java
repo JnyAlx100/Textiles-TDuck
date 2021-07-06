@@ -23,8 +23,6 @@ public class DetalleVentaSQL {
         try {
             ConexionDB con1 = ConexionDB.InstanciaSingleton();
             Connection con = con1.conectarMySQL();
-            System.out.println("ventaidventa: " + dv.getVentaIdVenta() + ", prductoid: " + dv.getProductoidProducto()
-            + ", cantidad: " + dv.getCantidad());
             String query
                     = " INSERT INTO detalleventa (Venta_idVenta, Producto_idProducto, cantidad) VALUES"
                     + "(" + "'" + dv.getVentaIdVenta() + "'" + "," + "'" + dv.getProductoidProducto() + "'" + "," + "'" + dv.getCantidad() + "'" + ")" + ";";

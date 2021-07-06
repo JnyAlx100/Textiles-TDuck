@@ -95,7 +95,7 @@ public class ControladorVentas {
         VentaSQL.insertarVenta(venta);
 
         for (Producto p : canasta) {
-            //se insertan todos los elementos de la canasta a la tabla "detallecompra"
+            //se insertan todos los elementos de la canasta a la tabla "detalleventa"
             DetalleVentaSQL.insertarDetalleVenta(new DetalleVenta(0, venta.getIdVenta(), p.getIdProducto(), p.getExistencias()));
 
             //se actualizan las existencias de los productos en la base de datos

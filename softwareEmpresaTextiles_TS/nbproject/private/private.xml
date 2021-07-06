@@ -2,6 +2,26 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/ProductoSQL.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/InsumoSQL.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/ControladorCompras.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/Insumo.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/Proveedores.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/DetalleCompra.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/ConexionDB.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/vista/VentasFormulario.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/ControladorVentas.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/ClienteSQL.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/Producto.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/vista/ComprasFormulario.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/VentaSQL.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/DetalleCompraSQL.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/DetalleVenta.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/DetalleVentaSQL.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/Compra.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/CompraSQL.java</file>
+            <file>file:/C:/Users/Serratia%20Marcesens/Documents/GitHub/Textiles-TDuck/softwareEmpresaTextiles_TS/src/modelo/ProveedoresSQL.java</file>
+        </group>
     </open-files>
 </project-private>

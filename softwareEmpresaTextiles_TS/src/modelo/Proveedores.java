@@ -27,6 +27,17 @@ public class Proveedores {
         this.telefono = telefono;
     }
 
+    public Proveedores() {
+    }
+
+    public int getIdProveedor() {
+        return idProveedor;
+    }
+
+    public void setIdProveedor(int idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+
     public int getIdCliente() {
         return idProveedor;
     }

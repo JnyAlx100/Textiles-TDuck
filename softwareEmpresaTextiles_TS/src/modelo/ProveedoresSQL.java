@@ -5,6 +5,7 @@
  */
 package modelo;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -35,5 +36,28 @@ public class ProveedoresSQL {
                     JOptionPane.WARNING_MESSAGE);
             System.out.println(ex);
         }
+    }
+    
+    public static Proveedores getProveedor(int id) {
+        Proveedores p = null;
+        try {
+            ConexionDB con1 = ConexionDB.InstanciaSingleton();
+            Connection cn = con1.conectarMySQL();
+            String sql = "SELECT * FROM proveedor WHERE idProveedor = " + id;
+            Statement st = (Statement) cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                p = new Proveedores();
+                p.setIdProveedor(id);
+                p.setNit(rs.getString("nit"));
+                p.setNombre(rs.getString("nombre"));
+                p.setDireccion(rs.getString("direccion"));
+                p.setCorreo(rs.getString("correo"));
+                p.setTelefono(Integer.parseInt(rs.getString("telefono")));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR AL OBTENER PROVEEDOR", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return p;
     }
 }
