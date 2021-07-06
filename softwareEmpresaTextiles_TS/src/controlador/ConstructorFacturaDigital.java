@@ -131,9 +131,7 @@ public class ConstructorFacturaDigital implements ConstructorFactura, Printable 
 
                     g2d.drawString("*************************************",10,y);y+=yShift;
                     g2d.drawString("        GRACIAS, VUELVA PRONTO       ",10,y);y+=yShift;
-                    g2d.drawString("*************************************",10,y);y+=yShift;
-//                    g2d.drawString("       SOFTWARE BY:CODEGUID          ",10,y);y+=yShift;
-//                    g2d.drawString("   CONTACT: contact@codeguid.com       ",10,y);y+=yShift;       
+                    g2d.drawString("*************************************",10,y);y+=yShift;    
                 }
                 catch(Exception e){
                 e.printStackTrace();

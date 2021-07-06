@@ -7,6 +7,7 @@ package modelo;
 
 import com.mysql.jdbc.log.Log;
 import controlador.ConstructorFacturaDigital;
+import controlador.FacturaControlador;
 import java.awt.HeadlessException;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -38,7 +39,7 @@ public class ControladorVentas {
 
     private Venta venta;
     private ArrayList<Producto> canasta;
-    private ConstructorFacturaDigital factura = new ConstructorFacturaDigital();
+    private FacturaControlador factura;
 
     public ControladorVentas(int idCliente, float total, int idUsuario) {
         venta = new Venta(VentaSQL.getIdNuevaVenta(), idCliente, java.sql.Date.valueOf(LocalDate.now()), 0, 0, 0, idUsuario);
@@ -95,7 +96,7 @@ public class ControladorVentas {
         VentaSQL.insertarVenta(venta);
 
         for (Producto p : canasta) {
-            //se insertan todos los elementos de la canasta a la tabla "detalleventa"
+            //se insertan todos los elementos de la canasta a la tabla "detallecompra"
             DetalleVentaSQL.insertarDetalleVenta(new DetalleVenta(0, venta.getIdVenta(), p.getIdProducto(), p.getExistencias()));
 
             //se actualizan las existencias de los productos en la base de datos
@@ -103,9 +104,14 @@ public class ControladorVentas {
             ProductoSQL.actualizarExistencias(p.getIdProducto(), existencias);
         }
         
-        factura.agregarProductos(canasta);
-        factura.setVenta(venta);
-        factura.generarFactura();
+        String [] opciones = {"Factura simple", "Factura tipo reporte"};
+        int index = JOptionPane.showOptionDialog(null, "TIPO DE FACTURA A IMPRIMIR", "Elija...", 0, JOptionPane.QUESTION_MESSAGE, null, opciones, null);
+        System.out.println(index);
+        factura = new FacturaControlador(index);
+        
+        factura.añadirCanastaAFactura(canasta);
+        factura.agregarVentaCorrespondiente(venta);
+        factura.generar();
         
         limpiar();
     }
