@@ -41,17 +41,19 @@ public class ClienteSQL {
         }
     }
     
-    public static Cliente getCliente(int id) {
+    public static Cliente getCliente(String nit) {
         Cliente c = null;
         try {
             ConexionDB con1 = ConexionDB.InstanciaSingleton();
             Connection cn = con1.conectarMySQL();
-            String sql = "SELECT * FROM cliente WHERE idCliente = " + id;
+            System.out.println("El nit entregado fue: " + nit);
+            System.out.println("SELECT * FROM cliente WHERE nit = '" + nit + "';");
+            String sql = "SELECT * FROM cliente WHERE nit = '" + nit + "';";
             Statement st = (Statement) cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 c = new Cliente();
-                c.setIdCliente(id);
+                c.setIdCliente(Integer.parseInt(rs.getString("idCliente")));
                 c.setNit(rs.getString("nit"));
                 c.setNombre(rs.getString("nombre"));
                 c.setDireccion(rs.getString("direccion"));
@@ -59,7 +61,8 @@ public class ClienteSQL {
                 c.setTelefono(Integer.parseInt(rs.getString("telefono")));
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERROR AL OBTENER PRODUCTO", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "ERROR AL OBTENER CLIENTE, REVISE EL NIT INGRESADO", "Error", JOptionPane.ERROR_MESSAGE);
         }
         return c;
     }
