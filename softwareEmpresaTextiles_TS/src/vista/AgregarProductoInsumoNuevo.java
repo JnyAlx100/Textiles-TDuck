@@ -1,5 +1,6 @@
 package vista;
 
+import controlador.ControladorProducto;
 import modelo.InsumoSQL;
 import modelo.ProductoSQL;
 import java.awt.Color;
@@ -17,6 +18,7 @@ import javax.swing.event.ChangeEvent;
 public class AgregarProductoInsumoNuevo extends javax.swing.JFrame {
     private ProductoSQL productoFuncionSQL = new ProductoSQL();
     private InsumoSQL insumoFuncionSQL = new InsumoSQL();
+    private ControladorProducto controladorInformacionProducto = new ControladorProducto();
     private String id, nombre, descripcion;
     private int existencias;
     private int productoInsumo = 0;
@@ -436,26 +438,17 @@ public class AgregarProductoInsumoNuevo extends javax.swing.JFrame {
             id = id_field.getText();
             nombre = nombre_field.getText();
             descripcion = desc_field.getText();
-            existencias = Integer.valueOf(existencias_field.getText());
-            precioV = Float.valueOf(pv_field.getText());
-            if (productoFuncionSQL.verificar_producto(id, nombre, descripcion, existencias_field.getText(), pv_field.getText()) == true) {
-                try {
-                    if (productoFuncionSQL.nuevo_producto(id, nombre, descripcion, existencias, precioV) == true) {
-                        vaciarFields();
-                        pc_field.setEnabled(true);
-                        productoCheck.setSelected(false);
-                        insumoCheck.setEnabled(true);
-                    } else {
-                        vaciarFields();
-                        pc_field.setEnabled(true);
-                        productoCheck.setSelected(false);
-                        insumoCheck.setEnabled(true);
-                    }
-                } catch (SQLException ex) {
-                    Logger.getLogger(AgregarProductoInsumoNuevo.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                if (controladorInformacionProducto.verificarInformacion(id, nombre, descripcion, existencias_field.getText(), pv_field.getText()) == true) {
+                    vaciarFields();
+                    pc_field.setEnabled(true);
+                    productoCheck.setSelected(false);
+                    insumoCheck.setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Comprobar ingreso de datos", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Comprobar ingreso de datos", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (SQLException ex) {
+                Logger.getLogger(AgregarProductoInsumoNuevo.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else if(productoInsumo == 2){
             id = id_field.getText();
