@@ -1,28 +1,22 @@
 package vista;
 
+import controlador.ControladorInsumo;
 import controlador.ControladorProducto;
-import modelo.InsumoSQL;
-import modelo.ProductoSQL;
 import java.awt.Color;
-import java.awt.event.ItemEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.event.ChangeEvent;
 
 /**
  *
  * @author jossu
  */
 public class AgregarProductoInsumoNuevo extends javax.swing.JFrame {
-    private ProductoSQL productoFuncionSQL = new ProductoSQL();
-    private InsumoSQL insumoFuncionSQL = new InsumoSQL();
     private ControladorProducto controladorInformacionProducto = new ControladorProducto();
+    private ControladorInsumo controladorInformacionInsumo = new ControladorInsumo();
     private String id, nombre, descripcion;
-    private int existencias;
     private int productoInsumo = 0;
-    private float precioC, precioV;
     
     public AgregarProductoInsumoNuevo() {
         initComponents();
@@ -434,10 +428,10 @@ public class AgregarProductoInsumoNuevo extends javax.swing.JFrame {
     }//GEN-LAST:event_pv_fieldActionPerformed
 
     private void btt_inicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_inicioActionPerformed
+        id = id_field.getText();
+        nombre = nombre_field.getText();
+        descripcion = desc_field.getText();
         if(productoInsumo == 1){
-            id = id_field.getText();
-            nombre = nombre_field.getText();
-            descripcion = desc_field.getText();
             try {
                 if (controladorInformacionProducto.verificarInformacion(id, nombre, descripcion, existencias_field.getText(), pv_field.getText()) == true) {
                     vaciarFields();
@@ -451,29 +445,17 @@ public class AgregarProductoInsumoNuevo extends javax.swing.JFrame {
                 Logger.getLogger(AgregarProductoInsumoNuevo.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else if(productoInsumo == 2){
-            id = id_field.getText();
-            nombre = nombre_field.getText();
-            descripcion = desc_field.getText();
-            existencias = Integer.valueOf(existencias_field.getText());
-            precioC = Float.valueOf(pc_field.getText());
-            if (insumoFuncionSQL.verificar_insumo(id, nombre, descripcion, existencias_field.getText(), pc_field.getText()) == true) {
-                try {
-                    if (insumoFuncionSQL.nuevo_insumo(id, nombre, descripcion, existencias, precioC) == true) {
-                        vaciarFields();
-                        pv_field.setEnabled(true);
-                        insumoCheck.setSelected(false);
-                        productoCheck.setEnabled(true);
-                    } else {
-                        vaciarFields();
-                        pv_field.setEnabled(true);
-                        insumoCheck.setSelected(false);
-                        productoCheck.setEnabled(true);
-                    }
-                } catch (SQLException ex) {
-                    Logger.getLogger(AgregarProductoInsumoNuevo.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                if (controladorInformacionInsumo.verificarInformacion(id, nombre, descripcion, existencias_field.getText(), pc_field.getText()) == true) {
+                    vaciarFields();
+                    pv_field.setEnabled(true);
+                    insumoCheck.setSelected(false);
+                    productoCheck.setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Comprobar ingreso de datos", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Comprobar ingreso de datos", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (SQLException ex) {
+                Logger.getLogger(AgregarProductoInsumoNuevo.class.getName()).log(Level.SEVERE, null, ex);
             }
         
         }else{
