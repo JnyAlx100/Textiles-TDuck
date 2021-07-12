@@ -1,5 +1,6 @@
 package vista;
 
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -10,6 +11,7 @@ public class menuPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.setTitle("Textiles TS");
         this.setResizable(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
     }
 
     @SuppressWarnings("unchecked")

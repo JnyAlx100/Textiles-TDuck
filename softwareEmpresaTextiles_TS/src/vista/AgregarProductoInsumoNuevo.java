@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +24,7 @@ public class AgregarProductoInsumoNuevo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.setTitle("Agregar nuevo producto");
         this.setResizable(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
     }
 
 

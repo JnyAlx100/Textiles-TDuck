@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.*;
@@ -28,6 +29,7 @@ public class VentasFormulario extends javax.swing.JFrame {
         initComponents();
         cv = new ControladorVentas(0, 0, 1);
         jTableModel = (DefaultTableModel) jTable4.getModel();
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
         limpiar();
         this.setLocationRelativeTo(null);
 //        new VentaSQL().insertarVenta(new Venta(1, 1, java.sql.Date.valueOf(LocalDate.now()), 0, 0, 0, 1));

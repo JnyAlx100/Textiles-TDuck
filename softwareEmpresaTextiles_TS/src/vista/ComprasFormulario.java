@@ -8,6 +8,7 @@ package vista;
 import java.awt.Color;
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.*;
@@ -28,6 +29,7 @@ public class ComprasFormulario extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButtonProductoExistente);
         jTableModel = (DefaultTableModel) jTable4.getModel();
         this.setLocationRelativeTo(null);
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
         limpiar();
     }
 

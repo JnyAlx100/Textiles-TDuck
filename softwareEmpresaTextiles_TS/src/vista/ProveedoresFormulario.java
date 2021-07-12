@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.*;
 
@@ -28,6 +29,7 @@ public class ProveedoresFormulario extends javax.swing.JFrame {
      */
     public ProveedoresFormulario() {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
     }
 
     /**

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.TimerTask;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -16,6 +17,7 @@ public class inicioSesion extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.setTitle("Software Textiles TS");
         this.setResizable(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
     }
 
     @SuppressWarnings("unchecked")

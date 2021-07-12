@@ -6,6 +6,7 @@ import modelo.InformacionInsumo;
 import modelo.InsumoSQL;
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +27,7 @@ public class EditarProducoInsumoExistente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.setTitle("Editar producto existente");
         this.setResizable(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
     }
 
     @SuppressWarnings("unchecked")

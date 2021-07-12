@@ -6,6 +6,7 @@
 package vista;
 
 import java.awt.Color;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import modelo.*;
 
@@ -22,6 +23,7 @@ public class Consultas extends javax.swing.JFrame {
     public Consultas() {
         initComponents();
         jTableModel = (DefaultTableModel) jTableConsultas.getModel();
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
     }
 
     /**

@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import modelo.Cliente;
 import modelo.ClienteSQL;
 
@@ -26,6 +27,7 @@ public class ClienteFormulario extends javax.swing.JFrame {
     public ClienteFormulario() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
     }
 
     /**

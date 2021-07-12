@@ -6,6 +6,7 @@ import modelo.InsumoSQL;
 import modelo.ProductoSQL;
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +25,7 @@ public class VerInventarioProductoInsumo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.setTitle("Inventario Principal Productos");
         this.setResizable(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
     }
 
     @SuppressWarnings("unchecked")
@@ -49,6 +51,11 @@ public class VerInventarioProductoInsumo extends javax.swing.JFrame {
         buscar_field.setForeground(new java.awt.Color(204, 204, 204));
         buscar_field.setText("Buscar producto por nombre");
         buscar_field.setBorder(null);
+        buscar_field.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                buscar_fieldCaretUpdate(evt);
+            }
+        });
         buscar_field.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 buscar_fieldFocusGained(evt);
@@ -195,7 +202,6 @@ public class VerInventarioProductoInsumo extends javax.swing.JFrame {
 
     private void buscar_fieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar_fieldKeyReleased
         // TODO add your handling code here:
-        filtro(buscar_field.getText(), jTable1,1);
     }//GEN-LAST:event_buscar_fieldKeyReleased
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -233,6 +239,20 @@ public class VerInventarioProductoInsumo extends javax.swing.JFrame {
             vaciarTabla();
         }
     }//GEN-LAST:event_insumoCheckActionPerformed
+
+    private void buscar_fieldCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_buscar_fieldCaretUpdate
+        String nombreProducotIsumoBuscar = buscar_field.getText();
+        if(nombreProducotIsumoBuscar.isEmpty()){
+            jTable1.clearSelection();
+        }else{
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                if (jTable1.getValueAt(i, 1).equals(nombreProducotIsumoBuscar)) {
+                    jTable1.requestFocus();
+                    jTable1.changeSelection(i, 1, false, false);
+                }
+            }
+        }
+    }//GEN-LAST:event_buscar_fieldCaretUpdate
 
     public static void main(String args[]) {
 

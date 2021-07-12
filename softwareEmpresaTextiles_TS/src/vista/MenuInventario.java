@@ -1,4 +1,7 @@
 package vista;
+
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author jossu
@@ -10,6 +13,7 @@ public class MenuInventario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.setTitle("Menu Inventario");
         this.setResizable(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
     }
 
     @SuppressWarnings("unchecked")
