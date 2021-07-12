@@ -16,16 +16,24 @@ import modelo.*;
  */
 public class Consultas extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Consultas
-     */
+    public UsuarioSistema us;
+    
     DefaultTableModel jTableModel;
     public Consultas() {
         initComponents();
         jTableModel = (DefaultTableModel) jTableConsultas.getModel();
         this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
+        this.setLocationRelativeTo(null);
     }
-
+    
+    public Consultas(UsuarioSistema us) {
+        initComponents();
+        jTableModel = (DefaultTableModel) jTableConsultas.getModel();
+        this.us = us;
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
+        this.setLocationRelativeTo(null);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,13 +55,14 @@ public class Consultas extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         ConsultaSimple = new javax.swing.JButton();
         ConsultaDetallada = new javax.swing.JButton();
+        btt_inicio1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Semilight", 0, 48)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Consultas");
 
@@ -79,7 +88,7 @@ public class Consultas extends javax.swing.JFrame {
         jTableConsultas.setSelectionBackground(new java.awt.Color(60, 187, 9));
         jScrollPane1.setViewportView(jTableConsultas);
 
-        buscar_field.setBackground(new java.awt.Color(255, 255, 255));
+        buscar_field.setBackground(new java.awt.Color(102, 102, 102));
         buscar_field.setForeground(new java.awt.Color(204, 204, 204));
         buscar_field.setText("Buscar producto por nombre");
         buscar_field.setBorder(null);
@@ -97,7 +106,9 @@ public class Consultas extends javax.swing.JFrame {
             }
         });
 
+        clienteCheck.setBackground(new java.awt.Color(102, 102, 102));
         clienteCheck.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        clienteCheck.setForeground(new java.awt.Color(255, 255, 255));
         clienteCheck.setSelected(true);
         clienteCheck.setText("Cliente");
         clienteCheck.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +117,9 @@ public class Consultas extends javax.swing.JFrame {
             }
         });
 
+        proveedorCheck.setBackground(new java.awt.Color(102, 102, 102));
         proveedorCheck.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        proveedorCheck.setForeground(new java.awt.Color(255, 255, 255));
         proveedorCheck.setText("Proveedor");
         proveedorCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +127,7 @@ public class Consultas extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nit Sujeto:");
 
         jSeparator6.setBackground(new java.awt.Color(41, 168, 73));
@@ -140,6 +153,16 @@ public class Consultas extends javax.swing.JFrame {
             }
         });
 
+        btt_inicio1.setBackground(new java.awt.Color(41, 168, 73));
+        btt_inicio1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btt_inicio1.setForeground(new java.awt.Color(255, 255, 255));
+        btt_inicio1.setText("Regresar");
+        btt_inicio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btt_inicio1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -147,30 +170,36 @@ public class Consultas extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(58, 58, 58)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(clienteCheck)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(proveedorCheck)
+                                                .addGap(75, 75, 75))
+                                            .addComponent(buscar_field)
+                                            .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(clienteCheck)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(proveedorCheck)
-                                        .addGap(75, 75, 75))
-                                    .addComponent(buscar_field)
-                                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ConsultaSimple, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ConsultaDetallada, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 795, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(64, Short.MAX_VALUE))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(ConsultaSimple, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(ConsultaDetallada, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 795, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 51, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btt_inicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +208,7 @@ public class Consultas extends javax.swing.JFrame {
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(clienteCheck)
@@ -196,7 +225,9 @@ public class Consultas extends javax.swing.JFrame {
                         .addComponent(ConsultaDetallada, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(btt_inicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,7 +238,7 @@ public class Consultas extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -272,6 +303,12 @@ public class Consultas extends javax.swing.JFrame {
         jTableConsultas.setModel(reporte.formatoTabla());
     }//GEN-LAST:event_ConsultaDetalladaActionPerformed
 
+    private void btt_inicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_inicio1ActionPerformed
+        menuPrincipal ventana = new menuPrincipal(us);
+        ventana.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btt_inicio1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -310,6 +347,7 @@ public class Consultas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ConsultaDetallada;
     private javax.swing.JButton ConsultaSimple;
+    private javax.swing.JButton btt_inicio1;
     private javax.swing.JTextField buscar_field;
     private javax.swing.JCheckBox clienteCheck;
     private javax.swing.JLabel jLabel1;

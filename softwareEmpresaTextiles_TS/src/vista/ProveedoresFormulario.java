@@ -23,6 +23,7 @@ public class ProveedoresFormulario extends javax.swing.JFrame {
 
     Proveedores proveedor = null;
     ProveedoresSQL proveedorsql = new ProveedoresSQL();
+    public UsuarioSistema us;
 
     /**
      * Creates new form ProveedoresFormulario
@@ -31,7 +32,12 @@ public class ProveedoresFormulario extends javax.swing.JFrame {
         initComponents();
         this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
     }
-
+    
+    public ProveedoresFormulario(UsuarioSistema us) {
+        initComponents();
+        this.us = us;
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,45 +66,46 @@ public class ProveedoresFormulario extends javax.swing.JFrame {
         jSeparator7 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
         btt_inicio = new javax.swing.JButton();
+        btt_inicio1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Semilight", 0, 48)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Proveedores");
 
         jSeparator5.setForeground(new java.awt.Color(41, 168, 73));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Nombre");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("NIT");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Dirección");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Teléfono");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Correo");
 
-        textNombre.setBackground(new java.awt.Color(255, 255, 255));
+        textNombre.setBackground(new java.awt.Color(102, 102, 102));
         textNombre.setForeground(new java.awt.Color(204, 204, 204));
         textNombre.setText("Ingrese el nombre");
         textNombre.setBorder(null);
@@ -113,7 +120,7 @@ public class ProveedoresFormulario extends javax.swing.JFrame {
             }
         });
 
-        textTelefono.setBackground(new java.awt.Color(255, 255, 255));
+        textTelefono.setBackground(new java.awt.Color(102, 102, 102));
         textTelefono.setForeground(new java.awt.Color(204, 204, 204));
         textTelefono.setText("Ingrese el teléfono de proveedor");
         textTelefono.setBorder(null);
@@ -128,7 +135,7 @@ public class ProveedoresFormulario extends javax.swing.JFrame {
             }
         });
 
-        textNit.setBackground(new java.awt.Color(255, 255, 255));
+        textNit.setBackground(new java.awt.Color(102, 102, 102));
         textNit.setForeground(new java.awt.Color(204, 204, 204));
         textNit.setText("Ingrese el NIT");
         textNit.setBorder(null);
@@ -143,7 +150,7 @@ public class ProveedoresFormulario extends javax.swing.JFrame {
             }
         });
 
-        textDireccion.setBackground(new java.awt.Color(255, 255, 255));
+        textDireccion.setBackground(new java.awt.Color(102, 102, 102));
         textDireccion.setForeground(new java.awt.Color(204, 204, 204));
         textDireccion.setText("Ingrese la dirección");
         textDireccion.setBorder(null);
@@ -158,7 +165,7 @@ public class ProveedoresFormulario extends javax.swing.JFrame {
             }
         });
 
-        textCorreo.setBackground(new java.awt.Color(255, 255, 255));
+        textCorreo.setBackground(new java.awt.Color(102, 102, 102));
         textCorreo.setForeground(new java.awt.Color(204, 204, 204));
         textCorreo.setText("Ingrese el correo electrónico");
         textCorreo.setBorder(null);
@@ -193,6 +200,16 @@ public class ProveedoresFormulario extends javax.swing.JFrame {
             }
         });
 
+        btt_inicio1.setBackground(new java.awt.Color(41, 168, 73));
+        btt_inicio1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btt_inicio1.setForeground(new java.awt.Color(255, 255, 255));
+        btt_inicio1.setText("Regresar");
+        btt_inicio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btt_inicio1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -200,48 +217,54 @@ public class ProveedoresFormulario extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(43, 43, 43)
+                                .addContainerGap()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(43, 43, 43)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel12)
-                                                .addGap(47, 47, 47))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel11)
-                                                .addGap(31, 31, 31)))
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(textCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(72, 72, 72)
-                                                .addComponent(btt_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(62, 62, 62)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(textNit, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(textDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                .addContainerGap(114, Short.MAX_VALUE))
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addComponent(jLabel12)
+                                                        .addGap(47, 47, 47))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                        .addComponent(jLabel11)
+                                                        .addGap(31, 31, 31)))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(textCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGap(72, 72, 72)
+                                                        .addComponent(btt_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(62, 62, 62)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(textNit, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(textDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                        .addGap(0, 104, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btt_inicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,7 +306,9 @@ public class ProveedoresFormulario extends javax.swing.JFrame {
                             .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(btt_inicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -296,10 +321,7 @@ public class ProveedoresFormulario extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -366,6 +388,12 @@ public class ProveedoresFormulario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btt_inicioActionPerformed
 
+    private void btt_inicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_inicio1ActionPerformed
+        menuPrincipal ventana = new menuPrincipal(us);
+        ventana.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btt_inicio1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -403,6 +431,7 @@ public class ProveedoresFormulario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btt_inicio;
+    private javax.swing.JButton btt_inicio1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

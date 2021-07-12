@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import modelo.UsuarioSistema;
 /**
  *
  * @author jossu
@@ -19,12 +20,22 @@ public class VerInventarioProductoInsumo extends javax.swing.JFrame {
     private DefaultTableModel dm;
     private ProductoSQL productoFuncionSQL = new ProductoSQL();
     private InsumoSQL insumoFuncionSQL = new InsumoSQL();
+    public UsuarioSistema us;
     
     public VerInventarioProductoInsumo() {
         initComponents();
         setLocationRelativeTo(null);
         this.setTitle("Inventario Principal Productos");
         this.setResizable(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
+    }
+    
+    public VerInventarioProductoInsumo(UsuarioSistema us) {
+        initComponents();
+        setLocationRelativeTo(null);
+        this.setTitle("Inventario Principal Productos");
+        this.setResizable(false);
+        this.us = us;
         this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
     }
 
@@ -45,11 +56,12 @@ public class VerInventarioProductoInsumo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
-        buscar_field.setBackground(new java.awt.Color(255, 255, 255));
+        buscar_field.setBackground(new java.awt.Color(102, 102, 102));
         buscar_field.setForeground(new java.awt.Color(204, 204, 204));
         buscar_field.setText("Buscar producto por nombre");
+        buscar_field.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         buscar_field.setBorder(null);
         buscar_field.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -93,7 +105,7 @@ public class VerInventarioProductoInsumo extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable1);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Inventario Principal");
 
@@ -102,13 +114,14 @@ public class VerInventarioProductoInsumo extends javax.swing.JFrame {
         btt_inicio1.setBackground(new java.awt.Color(41, 168, 73));
         btt_inicio1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btt_inicio1.setForeground(new java.awt.Color(255, 255, 255));
-        btt_inicio1.setText("Regresar");
+        btt_inicio1.setText("Cancelar");
         btt_inicio1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btt_inicio1ActionPerformed(evt);
             }
         });
 
+        productoCheck.setBackground(new java.awt.Color(102, 102, 102));
         productoCheck.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         productoCheck.setText("Producto");
         productoCheck.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +130,7 @@ public class VerInventarioProductoInsumo extends javax.swing.JFrame {
             }
         });
 
+        insumoCheck.setBackground(new java.awt.Color(102, 102, 102));
         insumoCheck.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         insumoCheck.setText("Insumo");
         insumoCheck.addActionListener(new java.awt.event.ActionListener() {
@@ -213,7 +227,7 @@ public class VerInventarioProductoInsumo extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1KeyPressed
 
     private void btt_inicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_inicio1ActionPerformed
-        MenuInventario ventana = new MenuInventario();
+        MenuInventario ventana = new MenuInventario(us);
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btt_inicio1ActionPerformed

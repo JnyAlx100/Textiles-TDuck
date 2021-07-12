@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import modelo.Cliente;
 import modelo.ClienteSQL;
+import modelo.UsuarioSistema;
 
 /**
  *
@@ -20,6 +21,7 @@ import modelo.ClienteSQL;
 public class ClienteFormulario extends javax.swing.JFrame {
     Cliente cliente = null;
     ClienteSQL clienteSQL= new ClienteSQL();
+    public UsuarioSistema us;
     
     /**
      * Creates new form ClienteFormulario
@@ -27,6 +29,13 @@ public class ClienteFormulario extends javax.swing.JFrame {
     public ClienteFormulario() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
+    }
+    
+    public ClienteFormulario(UsuarioSistema us) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.us = us;
         this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
     }
 
@@ -58,44 +67,45 @@ public class ClienteFormulario extends javax.swing.JFrame {
         textTelefono = new javax.swing.JTextField();
         jSeparator8 = new javax.swing.JSeparator();
         btt_inicio = new javax.swing.JButton();
+        btt_inicio1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Semilight", 0, 48)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Clientes");
 
         jSeparator5.setForeground(new java.awt.Color(41, 168, 73));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setText("NIT");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel8.setText("Nombre");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel10.setText("Dirección");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel12.setText("Correo");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel11.setText("Teléfono");
 
-        textNit.setBackground(new java.awt.Color(255, 255, 255));
+        textNit.setBackground(new java.awt.Color(102, 102, 102));
         textNit.setForeground(new java.awt.Color(204, 204, 204));
         textNit.setText("Ingrese el NIT");
         textNit.setBorder(null);
@@ -112,7 +122,7 @@ public class ClienteFormulario extends javax.swing.JFrame {
 
         jSeparator3.setForeground(new java.awt.Color(41, 168, 73));
 
-        textNombre.setBackground(new java.awt.Color(255, 255, 255));
+        textNombre.setBackground(new java.awt.Color(102, 102, 102));
         textNombre.setForeground(new java.awt.Color(204, 204, 204));
         textNombre.setText("Ingrese el nombre");
         textNombre.setBorder(null);
@@ -129,7 +139,7 @@ public class ClienteFormulario extends javax.swing.JFrame {
 
         jSeparator4.setForeground(new java.awt.Color(41, 168, 73));
 
-        textDireccion.setBackground(new java.awt.Color(255, 255, 255));
+        textDireccion.setBackground(new java.awt.Color(102, 102, 102));
         textDireccion.setForeground(new java.awt.Color(204, 204, 204));
         textDireccion.setText("Ingrese la dirección");
         textDireccion.setBorder(null);
@@ -146,7 +156,7 @@ public class ClienteFormulario extends javax.swing.JFrame {
 
         jSeparator6.setForeground(new java.awt.Color(41, 168, 73));
 
-        textCorreo.setBackground(new java.awt.Color(255, 255, 255));
+        textCorreo.setBackground(new java.awt.Color(102, 102, 102));
         textCorreo.setForeground(new java.awt.Color(204, 204, 204));
         textCorreo.setText("Ingrese el correo electrónico");
         textCorreo.setBorder(null);
@@ -163,7 +173,7 @@ public class ClienteFormulario extends javax.swing.JFrame {
 
         jSeparator7.setForeground(new java.awt.Color(41, 168, 73));
 
-        textTelefono.setBackground(new java.awt.Color(255, 255, 255));
+        textTelefono.setBackground(new java.awt.Color(102, 102, 102));
         textTelefono.setForeground(new java.awt.Color(204, 204, 204));
         textTelefono.setText("Ingrese el teléfono de proveedor");
         textTelefono.setBorder(null);
@@ -190,6 +200,16 @@ public class ClienteFormulario extends javax.swing.JFrame {
             }
         });
 
+        btt_inicio1.setBackground(new java.awt.Color(41, 168, 73));
+        btt_inicio1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btt_inicio1.setForeground(new java.awt.Color(255, 255, 255));
+        btt_inicio1.setText("Regresar");
+        btt_inicio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btt_inicio1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -197,15 +217,20 @@ public class ClienteFormulario extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,19 +239,19 @@ public class ClienteFormulario extends javax.swing.JFrame {
                             .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                                .addComponent(btt_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(251, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(55, 55, 55))
+                            .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btt_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btt_inicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,7 +260,7 @@ public class ClienteFormulario extends javax.swing.JFrame {
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btt_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -268,22 +293,20 @@ public class ClienteFormulario extends javax.swing.JFrame {
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(23, 23, 23))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(btt_inicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -350,6 +373,12 @@ public class ClienteFormulario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btt_inicioActionPerformed
 
+    private void btt_inicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_inicio1ActionPerformed
+        menuPrincipal ventana = new menuPrincipal(us);
+        ventana.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btt_inicio1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -387,6 +416,7 @@ public class ClienteFormulario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btt_inicio;
+    private javax.swing.JButton btt_inicio1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

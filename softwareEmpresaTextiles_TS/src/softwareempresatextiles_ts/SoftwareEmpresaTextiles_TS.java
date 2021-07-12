@@ -5,6 +5,8 @@
  */
 package softwareempresatextiles_ts;
 
+import vista.inicioSesion;
+
 /**
  *
  * @author Douglas
@@ -16,6 +18,8 @@ public class SoftwareEmpresaTextiles_TS {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        inicioSesion is = new inicioSesion();
+        is.setVisible(true);
     }
     
 }

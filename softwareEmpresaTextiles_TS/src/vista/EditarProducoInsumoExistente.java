@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import modelo.UsuarioSistema;
 
 /**
  *
@@ -21,6 +22,7 @@ public class EditarProducoInsumoExistente extends javax.swing.JFrame {
     private final InsumoSQL insumoFuncionSQL = new InsumoSQL();
     private DefaultTableModel dm;
     private int identificadorTabla = 0;
+    public UsuarioSistema us;
     
     public EditarProducoInsumoExistente() {
         initComponents();
@@ -29,7 +31,15 @@ public class EditarProducoInsumoExistente extends javax.swing.JFrame {
         this.setResizable(false);
         this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
     }
-
+    
+    public EditarProducoInsumoExistente(UsuarioSistema us) {
+        initComponents();
+        setLocationRelativeTo(null);
+        this.setTitle("Editar producto existente");
+        this.setResizable(false);
+        this.us = us;
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -66,10 +76,10 @@ public class EditarProducoInsumoExistente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Editar producto/Insumo existente");
 
@@ -95,7 +105,7 @@ public class EditarProducoInsumoExistente extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        buscar_field.setBackground(new java.awt.Color(255, 255, 255));
+        buscar_field.setBackground(new java.awt.Color(102, 102, 102));
         buscar_field.setForeground(new java.awt.Color(204, 204, 204));
         buscar_field.setText("Buscar producto/Insumo por nombre");
         buscar_field.setBorder(null);
@@ -126,66 +136,66 @@ public class EditarProducoInsumoExistente extends javax.swing.JFrame {
         jSeparator9.setForeground(new java.awt.Color(41, 168, 73));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("Id Producto: ");
 
-        id_field1.setBackground(new java.awt.Color(255, 255, 255));
+        id_field1.setBackground(new java.awt.Color(102, 102, 102));
         id_field1.setForeground(new java.awt.Color(51, 51, 51));
         id_field1.setBorder(null);
 
         jSeparator10.setForeground(new java.awt.Color(41, 168, 73));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Nombre:");
 
-        nombre_field1.setBackground(new java.awt.Color(255, 255, 255));
+        nombre_field1.setBackground(new java.awt.Color(102, 102, 102));
         nombre_field1.setForeground(new java.awt.Color(51, 51, 51));
         nombre_field1.setBorder(null);
 
         jSeparator11.setForeground(new java.awt.Color(41, 168, 73));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Descripcion:");
 
-        desc_field1.setBackground(new java.awt.Color(255, 255, 255));
+        desc_field1.setBackground(new java.awt.Color(102, 102, 102));
         desc_field1.setForeground(new java.awt.Color(51, 51, 51));
         desc_field1.setBorder(null);
 
         jSeparator12.setForeground(new java.awt.Color(41, 168, 73));
 
         jLabel18.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("Existencias:");
 
-        existencias_field1.setBackground(new java.awt.Color(255, 255, 255));
+        existencias_field1.setBackground(new java.awt.Color(102, 102, 102));
         existencias_field1.setForeground(new java.awt.Color(51, 51, 51));
         existencias_field1.setBorder(null);
 
         jSeparator13.setForeground(new java.awt.Color(41, 168, 73));
 
-        pc_field1.setBackground(new java.awt.Color(255, 255, 255));
+        pc_field1.setBackground(new java.awt.Color(102, 102, 102));
         pc_field1.setForeground(new java.awt.Color(51, 51, 51));
         pc_field1.setBorder(null);
 
         jLabel19.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("Precio compra:");
 
         jSeparator14.setForeground(new java.awt.Color(41, 168, 73));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("Precio venta:");
 
-        pv_field1.setBackground(new java.awt.Color(255, 255, 255));
+        pv_field1.setBackground(new java.awt.Color(102, 102, 102));
         pv_field1.setForeground(new java.awt.Color(51, 51, 51));
         pv_field1.setBorder(null);
         pv_field1.addActionListener(new java.awt.event.ActionListener() {
@@ -216,6 +226,8 @@ public class EditarProducoInsumoExistente extends javax.swing.JFrame {
             }
         });
 
+        productoCheck.setBackground(new java.awt.Color(102, 102, 102));
+        productoCheck.setForeground(new java.awt.Color(255, 255, 255));
         productoCheck.setText("Producto");
         productoCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,6 +235,8 @@ public class EditarProducoInsumoExistente extends javax.swing.JFrame {
             }
         });
 
+        insumoCheck.setBackground(new java.awt.Color(102, 102, 102));
+        insumoCheck.setForeground(new java.awt.Color(255, 255, 255));
         insumoCheck.setText("Insumo");
         insumoCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -444,7 +458,7 @@ public class EditarProducoInsumoExistente extends javax.swing.JFrame {
 
     private void btt_inicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_inicio1ActionPerformed
         vaciarEditar();
-        MenuInventario ventana = new MenuInventario();
+        MenuInventario ventana = new MenuInventario(us);
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btt_inicio1ActionPerformed

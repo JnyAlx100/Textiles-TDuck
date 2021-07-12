@@ -24,6 +24,7 @@ public class VentasFormulario extends javax.swing.JFrame {
 
     ControladorVentas cv;
     DefaultTableModel jTableModel;
+    public UsuarioSistema us;
     
     public VentasFormulario() {
         initComponents();
@@ -32,6 +33,18 @@ public class VentasFormulario extends javax.swing.JFrame {
         this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
         limpiar();
         this.setLocationRelativeTo(null);
+//        new VentaSQL().insertarVenta(new Venta(1, 1, java.sql.Date.valueOf(LocalDate.now()), 0, 0, 0, 1));
+        
+    }
+    
+    public VentasFormulario(UsuarioSistema us) {
+        initComponents();
+        cv = new ControladorVentas(0, 0, 1);
+        jTableModel = (DefaultTableModel) jTable4.getModel();
+        this.setLocationRelativeTo(null);
+        this.us = us;
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/programa.png")).getImage());
+        limpiar();
 //        new VentaSQL().insertarVenta(new Venta(1, 1, java.sql.Date.valueOf(LocalDate.now()), 0, 0, 0, 1));
         
     }
@@ -49,7 +62,6 @@ public class VentasFormulario extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
         btt_inicio = new javax.swing.JButton();
-        btt_inicio1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jTextFieldClienteNombre = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -76,6 +88,8 @@ public class VentasFormulario extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jTextFieldProductoPrecio = new javax.swing.JTextField();
         jSeparator8 = new javax.swing.JSeparator();
+        btt_inicio1 = new javax.swing.JButton();
+        jLabelCajero = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,19 +132,8 @@ public class VentasFormulario extends javax.swing.JFrame {
         });
         jPanel1.add(btt_inicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 159, 40));
 
-        btt_inicio1.setBackground(new java.awt.Color(41, 168, 73));
-        btt_inicio1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btt_inicio1.setForeground(new java.awt.Color(255, 255, 255));
-        btt_inicio1.setText("Nuevo Cliente");
-        btt_inicio1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btt_inicio1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btt_inicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(663, 33, 159, 40));
-
         jLabel6.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Nombre cliente");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, -1, -1));
@@ -152,13 +155,13 @@ public class VentasFormulario extends javax.swing.JFrame {
         jPanel1.add(jTextFieldClienteNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 120, 150, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Semilight", 0, 48)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Ventas");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 19, 169, 40));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("ID Producto");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
@@ -179,7 +182,7 @@ public class VentasFormulario extends javax.swing.JFrame {
         jPanel1.add(jTextFieldProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 186, 30));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Cantidad");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
@@ -220,26 +223,29 @@ public class VentasFormulario extends javax.swing.JFrame {
                 btt_inicio2ActionPerformed(evt);
             }
         });
-        jPanel1.add(btt_inicio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 590, 159, 40));
+        jPanel1.add(btt_inicio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 159, 40));
 
         jSeparator5.setBackground(new java.awt.Color(41, 168, 73));
         jSeparator5.setForeground(new java.awt.Color(41, 168, 73));
         jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 79, 203, 13));
 
         jLabelIdVenta.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jLabelIdVenta.setForeground(new java.awt.Color(255, 255, 255));
         jLabelIdVenta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelIdVenta.setText("ID:");
-        jPanel1.add(jLabelIdVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 560, -1, -1));
+        jLabelIdVenta.setText("ID Venta:");
+        jPanel1.add(jLabelIdVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 620, -1, -1));
 
         jLabelFecha.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jLabelFecha.setForeground(new java.awt.Color(255, 255, 255));
         jLabelFecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelFecha.setText("Fecha:");
-        jPanel1.add(jLabelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 560, -1, -1));
+        jPanel1.add(jLabelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 620, -1, -1));
 
         jLabelTotal.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jLabelTotal.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTotal.setText("Total:");
-        jPanel1.add(jLabelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 560, -1, -1));
+        jPanel1.add(jLabelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 620, -1, -1));
 
         jLabel1.setBackground(new java.awt.Color(79, 82, 84));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lens.png"))); // NOI18N
@@ -260,7 +266,7 @@ public class VentasFormulario extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("NIT Cliente");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 131, -1, -1));
@@ -285,7 +291,7 @@ public class VentasFormulario extends javax.swing.JFrame {
         jPanel1.add(jTextFieldCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 186, 30));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Nombre producto");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, -1, -1));
@@ -311,7 +317,7 @@ public class VentasFormulario extends javax.swing.JFrame {
         jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 210, 170, 9));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Precio producto");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 190, -1, -1));
@@ -336,15 +342,34 @@ public class VentasFormulario extends javax.swing.JFrame {
         jSeparator8.setForeground(new java.awt.Color(41, 168, 73));
         jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 210, 180, 9));
 
+        btt_inicio1.setBackground(new java.awt.Color(41, 168, 73));
+        btt_inicio1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btt_inicio1.setForeground(new java.awt.Color(255, 255, 255));
+        btt_inicio1.setText("Regresar");
+        btt_inicio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btt_inicio1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btt_inicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 620, -1, -1));
+
+        jLabelCajero.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jLabelCajero.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCajero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelCajero.setText("Cajero:");
+        jPanel1.add(jLabelCajero, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1197, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1215, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -376,12 +401,6 @@ public class VentasFormulario extends javax.swing.JFrame {
         // TODO add your handling code here:
         jTextFieldClienteNombre.setForeground(Color.BLACK);
     }//GEN-LAST:event_jTextFieldClienteNombreFocusGained
-
-    private void btt_inicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_inicio1ActionPerformed
-        // TODO add your handling code here:
-        ClienteFormulario cf = new ClienteFormulario();
-        cf.setVisible(true);
-    }//GEN-LAST:event_btt_inicio1ActionPerformed
 
     private void btt_inicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_inicioActionPerformed
         //se verifica que haya texto en los jTextField
@@ -459,8 +478,15 @@ public class VentasFormulario extends javax.swing.JFrame {
     private void jTextFieldProductoPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProductoPrecioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldProductoPrecioActionPerformed
+
+    private void btt_inicio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_inicio1ActionPerformed
+        menuPrincipal ventana = new menuPrincipal(us);
+        ventana.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btt_inicio1ActionPerformed
     
     public void limpiar() {
+        jLabelCajero.setText("Cajero: " + us.getNombre());
         jTextFieldCantidad.setText("");
         jTextFieldProducto.setText("");
         jTextFieldProductoNombre.setText("");
@@ -522,6 +548,7 @@ public class VentasFormulario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelCajero;
     private javax.swing.JLabel jLabelFecha;
     private javax.swing.JLabel jLabelIdVenta;
     private javax.swing.JLabel jLabelTotal;

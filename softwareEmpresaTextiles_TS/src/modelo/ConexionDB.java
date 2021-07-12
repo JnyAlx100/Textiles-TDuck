@@ -23,7 +23,7 @@ public class ConexionDB {
     private String puerto = "3306";//<- Posiblemente eso
     private String url = "jdbc:mysql://" + host + "/" + base;
     private String user = "root";
-    private String password = "1234";
+    private String password = "url.2020";
     private static ConexionDB instancia;
     private ArrayList<String> atributos = new ArrayList<String>();
 

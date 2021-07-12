@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import modelo.UsuarioSistemaSQL;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class inicioSesion extends javax.swing.JFrame {
@@ -48,7 +49,7 @@ public class inicioSesion extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new java.awt.CardLayout());
 
-        login.setBackground(new java.awt.Color(255, 255, 255));
+        login.setBackground(new java.awt.Color(102, 102, 102));
 
         jSeparator1.setBackground(new java.awt.Color(41, 168, 73));
         jSeparator1.setForeground(new java.awt.Color(41, 168, 73));
@@ -56,6 +57,7 @@ public class inicioSesion extends javax.swing.JFrame {
         jSeparator2.setBackground(new java.awt.Color(41, 168, 73));
         jSeparator2.setForeground(new java.awt.Color(41, 168, 73));
 
+        label_user.setBackground(new java.awt.Color(102, 102, 102));
         label_user.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         label_user.setForeground(new java.awt.Color(204, 204, 204));
         label_user.setText("Usuario");
@@ -66,6 +68,7 @@ public class inicioSesion extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user.png"))); // NOI18N
 
@@ -83,9 +86,10 @@ public class inicioSesion extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("¿Has olvidado tu contraseña?");
 
+        label_password.setBackground(new java.awt.Color(102, 102, 102));
         label_password.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         label_password.setForeground(new java.awt.Color(204, 204, 204));
         label_password.setText("Contraseña");
@@ -97,11 +101,11 @@ public class inicioSesion extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Iniciar Sesión");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Crear nuevo usuario");
 
         javax.swing.GroupLayout loginLayout = new javax.swing.GroupLayout(login);
@@ -240,7 +244,8 @@ public class inicioSesion extends javax.swing.JFrame {
             new java.util.Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    menuPrincipal ventana = new menuPrincipal();
+                    System.out.println("user: " + user);
+                    menuPrincipal ventana = new menuPrincipal(UsuarioSistemaSQL.getUsuario(user));
                     ventana.show();
                     dispose();
                 }
@@ -262,11 +267,11 @@ public class inicioSesion extends javax.swing.JFrame {
             Connection con1 = null;
             ConexionDB conect1 = ConexionDB.InstanciaSingleton();
             con1 = conect1.conectarMySQL();
-            String sql = "SELECT `user`, `password` FROM `prueba`.`usuarios` WHERE  `user`="+"'"+user+"'" +" AND `password`="+"'"+pass+"'";
+            String sql = "SELECT `idGenerado`, `password` FROM `textilests`.`usuariosistema` WHERE  `idGenerado`="+"'"+user+"'" +" AND `password`="+"'"+pass+"'";
             Statement st = con1.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                if(rs.getString("user").equals(user) && rs.getString("password").equals(pass)){
+                if(rs.getString("idGenerado").equals(user) && rs.getString("password").equals(pass)){
                     resultado = true;
                 }else{
                     resultado = false;
